@@ -13,12 +13,12 @@ test('TC-TOG-01 Mark the task as completed @smoke', async ({ page }) => {
     await task.getByRole('checkbox', { name: 'Toggle Todo' }).click();
 
     // У <li> появился класс completed, чекбокс отмечен
-    await expect(task).toHaveClass('completed');
+    await expect(task).toContainClass('completed');
     await expect(task.getByRole('checkbox', { name: 'Toggle Todo' })).toBeChecked();
 
 });
 
-test('TC-ADD-02 Remove the mark @smoke', async ({ page }) => {
+test('TC-TOG-02 Remove the mark @smoke', async ({ page }) => {
     await page.goto('https://demo.playwright.dev/todomvc');
 
     // Отметить задачу, снять отметку
@@ -32,7 +32,7 @@ test('TC-ADD-02 Remove the mark @smoke', async ({ page }) => {
     await task.getByRole('checkbox', { name: 'Toggle Todo' }).click();
 
     // Класс completed снят
-    await expect(task).not.toHaveClass('completed');
+    await expect(task).not.toContainClass('completed');
     await expect(task.getByRole('checkbox', { name: 'Toggle Todo' })).not.toBeChecked();
 
 });
@@ -55,9 +55,11 @@ test('TC-TOG-04 Mark all as complete @smoke', async ({ page }) => {
     // Все 3 задачи выполнены, счётчик «0 items left»
     const task = page.getByTestId('todo-item');
 
+    await expect(task).toHaveCount(TODO_ITEMS.length);
     for (const li of await task.all()) {
-        await expect(li).toHaveClass('completed');
+        await expect(li).toContainClass('completed');
         await expect(li.getByRole('checkbox', { name: 'Toggle Todo' })).toBeChecked();
     }
 
+    await expect(page.getByTestId('todo-count')).toHaveText('0 items left');
 });

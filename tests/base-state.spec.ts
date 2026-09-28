@@ -8,7 +8,7 @@ test('TC-INIT-01 Empty list upon initial opening @smoke', async ({page}) => {
 
     // Задач нет.
     await expect(page.getByTestId('todo-item')).toHaveCount(0);
-
+    await expect(page.getByRole('heading')).toHaveText('todos');
     // Блоки .main и .footer скрыты
     const locator = page.locator('.main, .footer');
     await expect(locator).toBeHidden();

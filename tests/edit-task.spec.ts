@@ -12,7 +12,7 @@ test('TC-EDIT-01 Enter edit mode @smoke', async ({page}) => {
     await task.dblclick();
 
     // У <li> класс editing, поле Edit видимо и содержит текущий текст
-    await expect(task).toHaveClass('editing');
+    await expect(task).toContainClass('editing');
     await expect(task.getByRole('textbox', { name: 'Edit' })).toBeVisible();
     await expect(task.getByRole('textbox', { name: 'Edit' })).toHaveValue('buy some cheese');
 });
@@ -31,7 +31,7 @@ test('TC-EDIT-02 Save on Enter @smoke', async ({page}) => {
     await task.getByRole('textbox', { name: 'Edit' }).press('Enter');
 
     // Текст задачи обновлён, режим редактирования закрыт
-    await expect(task).not.toHaveClass('editing');
+    await expect(task).not.toContainClass('editing');
     await expect(task.getByRole('textbox', { name: 'Edit' })).toBeHidden();
     await expect(task.getByTestId('todo-title')).toHaveText('feed the cat');
 });

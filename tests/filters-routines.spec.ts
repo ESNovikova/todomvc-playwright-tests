@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('TC-FLT-01 Data is preserved after a reboot @smoke', async ({page}) => {
+test('TC-FLT-01 Acive Filter @smoke', async ({page}) => {
     await page.goto('https://demo.playwright.dev/todomvc');
 
     // 3 задачи, 2-я выполнена, нажать Active

@@ -35,7 +35,8 @@ test('TC-ADD-02 Add multiple tasks @smoke', async({page}) => {
     await expect(task).toHaveCount(TODO_ITEMS.length);
     await expect(task.getByTestId('todo-title')).toHaveText(TODO_ITEMS);
 
-    for (const li of await task.all())
-        await expect(li).not.toHaveClass('completed');
-
+    for (const li of await task.all()) {
+        await expect(li).not.toContainClass('completed');
+        await expect(li.getByRole('checkbox', { name: 'Toggle Todo' })).not.toBeChecked();
+    }
 });
