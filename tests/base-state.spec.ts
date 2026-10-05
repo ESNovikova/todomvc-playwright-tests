@@ -1,16 +1,15 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures/base-todo.ts';
 
-test('TC-INIT-01 Empty list upon initial opening @smoke', async ({page}) => {
-    await page.goto('https://demo.playwright.dev/todomvc');
+test.describe('6.1 Начальное состояние', () => {
+    test('TC-INIT-01 Пустой список при первом открытии @smoke', async ({ todoPage, page }) => {
+        // Заголовок «todos».
+        await expect(page).toHaveTitle(/React • TodoMVC/);
 
-    // Заголовок «todos».
-    await expect(page).toHaveTitle(/React • TodoMVC/);
-
-    // Задач нет.
-    await expect(page.getByTestId('todo-item')).toHaveCount(0);
-    await expect(page.getByRole('heading')).toHaveText('todos');
-    // Блоки .main и .footer скрыты
-    const locator = page.locator('.main, .footer');
-    await expect(locator).toBeHidden();
-
+        // Задач нет.
+        await expect(todoPage.todoItems).toHaveCount(0);
+        await expect(page.getByRole('heading', { name: 'todos' })).toHaveText('todos');
+        // Блоки .main и .footer скрыты
+        const mainAndFooter = page.locator('.main, .footer');
+        await expect(mainAndFooter).toBeHidden();
+    });
 });
