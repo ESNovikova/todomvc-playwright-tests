@@ -1,12 +1,8 @@
 import { test, expect, TODO_ITEMS } from './fixtures/base-todo.ts';
 
 test.describe('6.7 Фильтры и маршрутизация', () => {
-    test('TC-FLT-01 Фильтр Active @smoke', async ({ todoPage, page }) => {
-        // 3 задачи, 2-я выполнена, нажать Active
-        for (const value of TODO_ITEMS) {
-            await todoPage.addTodo(value);
-        }
-
+    test('TC-FLT-01 Фильтр Active @smoke', async ({ todoPageWithItems: todoPage, page }) => {
+        // 3 задачи (сделано в фикстуре), 2-я выполнена, нажать Active
         const completedTask = TODO_ITEMS[1];
         await todoPage.toggleTodo(completedTask);
 
@@ -20,12 +16,8 @@ test.describe('6.7 Фильтры и маршрутизация', () => {
         await expect(page).toHaveURL(/#\/active$/);
     });
 
-    test('TC-FLT-02 Фильтр Completed @smoke', async ({ todoPage, page }) => {
-        // 3 задачи, 2-я выполнена, нажать Completed
-        for (const value of TODO_ITEMS) {
-            await todoPage.addTodo(value);
-        }
-
+    test('TC-FLT-02 Фильтр Completed @smoke', async ({ todoPageWithItems: todoPage, page }) => {
+        // 3 задачи (сделано в фикстуре), 2-я выполнена, нажать Completed
         const completedTask = TODO_ITEMS[1];
         await todoPage.toggleTodo(completedTask);
 

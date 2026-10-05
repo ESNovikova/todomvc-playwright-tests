@@ -37,13 +37,5 @@ export class TodoPage {
         const todo = this.todoItems.filter({ hasText: text });
         await todo.hover();
         await todo.getByLabel('Delete').click();
-
-    }
-
-    async removeAll() {
-        while ((await this.todoItems.count()) > 0) {
-            await this.todoItems.first().hover();
-            await this.todoItems.getByLabel('Delete').first().click();
-        }
     }
 }

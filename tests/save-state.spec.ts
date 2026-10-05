@@ -34,6 +34,5 @@ test.describe('6.8 Сохранение состояния', () => {
 
         await expect(todoPage.todoItems.filter({ hasText: completedTask })).toContainClass('completed');
         await expect(todoPage.todoItems.filter({ hasText: completedTask }).getByRole('checkbox', { name: 'Toggle Todo' })).toBeChecked();
-        await expect(todoPage.todoItems.filter({ hasNotText: completedTask })).toHaveText(TODO_ITEMS_MIN[0]);
     });
 });

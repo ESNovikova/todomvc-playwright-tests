@@ -1,12 +1,8 @@
 import { test, expect, TODO_ITEMS } from './fixtures/base-todo.ts';
 
 test.describe('6.5 Удаление', () => {
-    test('TC-DEL-02 Удаление задачи @smoke', async ({ todoPage }) => {
+    test('TC-DEL-02 Удаление задачи @smoke', async ({ todoPageWithItems: todoPage }) => {
         // Навести курсор, нажать Delete
-        for (const value of TODO_ITEMS) {
-            await todoPage.addTodo(value);
-        }
-
         await todoPage.removeTodo(TODO_ITEMS[1]);
 
         // Задача удалена, остальные на месте
@@ -16,12 +12,8 @@ test.describe('6.5 Удаление', () => {
         await expect(todoPage.todoItems.getByTestId('todo-title')).toHaveText(REMAINING_ITEMS);
     });
 
-    test('TC-DEL-05 «Clear completed» @smoke', async ({ todoPage }) => {
-        // Добавить 3 задачи, отметить 2, нажать «Clear completed»
-        for (const value of TODO_ITEMS) {
-            await todoPage.addTodo(value);
-        }
-
+    test('TC-DEL-05 «Clear completed» @smoke', async ({ todoPageWithItems: todoPage }) => {
+        // Добавить 3 задачи (сделано в фикстуре), отметить 2, нажать «Clear completed»
         await todoPage.toggleTodo(TODO_ITEMS[0]);
         await todoPage.toggleTodo(TODO_ITEMS[TODO_ITEMS.length - 1]);
 

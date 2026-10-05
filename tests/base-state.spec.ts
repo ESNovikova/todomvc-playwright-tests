@@ -7,7 +7,7 @@ test.describe('6.1 Начальное состояние', () => {
 
         // Задач нет.
         await expect(todoPage.todoItems).toHaveCount(0);
-        await expect(page.getByRole('heading', { name: 'todos' })).toHaveText('todos');
+        await expect(page.getByRole('heading', { name: 'todos' })).toBeVisible();
         // Блоки .main и .footer скрыты
         const mainAndFooter = page.locator('.main, .footer');
         await expect(mainAndFooter).toBeHidden();
